@@ -1472,7 +1472,7 @@ namespace HtmlAgilityPack
 			// note: some headers are collection (ex: www-authenticate)
 			// we don't handle that here
 			XmlDocument doc = new XmlDocument();
-			doc.Load(GetCacheHeadersPath(requestUri));
+			doc.Load(File.Open(GetCacheHeadersPath(requestUri), FileMode.Open, FileAccess.Read));
 			XmlNode node =
 				doc.SelectSingleNode("//h[translate(@n, 'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')='" +
 									 name.ToUpper() + "']");
