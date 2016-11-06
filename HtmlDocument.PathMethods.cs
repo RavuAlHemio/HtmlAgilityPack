@@ -56,7 +56,7 @@ namespace HtmlAgilityPack
             {
                 throw new ArgumentNullException("path");
             }
-            using (StreamReader sr = new StreamReader(path, OptionDefaultStreamEncoding))
+            using (StreamReader sr = new StreamReader(File.Open(path, FileMode.Open, FileAccess.Read), OptionDefaultStreamEncoding))
             {
                 Encoding encoding = DetectEncoding(sr);
                 return encoding;
@@ -72,7 +72,7 @@ namespace HtmlAgilityPack
             if (path == null)
                 throw new ArgumentNullException("path");
 
-            using(StreamReader sr = new StreamReader(path, OptionDefaultStreamEncoding))
+            using(StreamReader sr = new StreamReader(File.Open(path, FileMode.Open, FileAccess.Read), OptionDefaultStreamEncoding))
             {
                 Load(sr);
             }
@@ -88,7 +88,7 @@ namespace HtmlAgilityPack
             if (path == null)
                 throw new ArgumentNullException("path");
 
-           using(StreamReader sr = new StreamReader(path, detectEncodingFromByteOrderMarks))
+           using(StreamReader sr = new StreamReader(File.Open(path, FileMode.Open, FileAccess.Read), detectEncodingFromByteOrderMarks))
            {
                Load(sr);
            }
@@ -107,7 +107,7 @@ namespace HtmlAgilityPack
             if (encoding == null)
                 throw new ArgumentNullException("encoding");
 
-            using(StreamReader sr = new StreamReader(path, encoding))
+            using(StreamReader sr = new StreamReader(File.Open(path, FileMode.Open, FileAccess.Read), encoding))
             {
                 Load(sr);
             }
@@ -127,7 +127,7 @@ namespace HtmlAgilityPack
             if (encoding == null)
                 throw new ArgumentNullException("encoding");
 
-           using(StreamReader sr = new StreamReader(path, encoding, detectEncodingFromByteOrderMarks))
+           using(StreamReader sr = new StreamReader(File.Open(path, FileMode.Open, FileAccess.Read), encoding, detectEncodingFromByteOrderMarks))
            {
                Load(sr);
            }
@@ -148,7 +148,7 @@ namespace HtmlAgilityPack
             if (encoding == null)
                 throw new ArgumentNullException("encoding");
 
-           using(StreamReader sr = new StreamReader(path, encoding, detectEncodingFromByteOrderMarks, buffersize))
+           using(StreamReader sr = new StreamReader(File.Open(path, FileMode.Open, FileAccess.Read), encoding, detectEncodingFromByteOrderMarks, buffersize))
            {
                Load(sr);
            }
@@ -159,7 +159,7 @@ namespace HtmlAgilityPack
         /// <param name="filename">The location of the file where you want to save the document.</param>
         public void Save(string filename)
         {
-            using(StreamWriter sw = new StreamWriter(filename, false, GetOutEncoding()))
+            using(StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create, FileAccess.Write), GetOutEncoding()))
             {
                 Save(sw);
             }
@@ -180,7 +180,7 @@ namespace HtmlAgilityPack
             {
                 throw new ArgumentNullException("encoding");
             }
-            using(StreamWriter sw = new StreamWriter(filename, false, encoding))
+            using(StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create, FileAccess.Write), encoding))
             {
                 Save(sw);
             }

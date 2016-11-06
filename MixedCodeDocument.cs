@@ -204,7 +204,7 @@ namespace HtmlAgilityPack
         /// <param name="path">The complete file path to be read.</param>
         public void Load(string path)
         {
-            Load(new StreamReader(path));
+            Load(new StreamReader(File.Open(path, FileMode.Open, FileAccess.Read)));
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace HtmlAgilityPack
         /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
         public void Load(string path, bool detectEncodingFromByteOrderMarks)
         {
-            Load(new StreamReader(path, detectEncodingFromByteOrderMarks));
+            Load(new StreamReader(File.Open(path, FileMode.Open, FileAccess.Read), detectEncodingFromByteOrderMarks));
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace HtmlAgilityPack
         /// <param name="encoding">The character encoding to use.</param>
         public void Load(string path, Encoding encoding)
         {
-            Load(new StreamReader(path, encoding));
+            Load(new StreamReader(File.Open(path, FileMode.Open, FileAccess.Read), encoding));
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace HtmlAgilityPack
         /// <param name="detectEncodingFromByteOrderMarks">Indicates whether to look for byte order marks at the beginning of the file.</param>
         public void Load(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks)
         {
-            Load(new StreamReader(path, encoding, detectEncodingFromByteOrderMarks));
+            Load(new StreamReader(File.Open(path, FileMode.Open, FileAccess.Read), encoding, detectEncodingFromByteOrderMarks));
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace HtmlAgilityPack
         /// <param name="buffersize">The minimum buffer size.</param>
         public void Load(string path, Encoding encoding, bool detectEncodingFromByteOrderMarks, int buffersize)
         {
-            Load(new StreamReader(path, encoding, detectEncodingFromByteOrderMarks, buffersize));
+            Load(new StreamReader(File.Open(path, FileMode.Open, FileAccess.Read), encoding, detectEncodingFromByteOrderMarks, buffersize));
         }
 
         /// <summary>
@@ -307,7 +307,7 @@ namespace HtmlAgilityPack
         /// <param name="filename">The location of the file where you want to save the document.</param>
         public void Save(string filename)
         {
-            StreamWriter sw = new StreamWriter(filename, false, GetOutEncoding());
+            StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create, FileAccess.Write), GetOutEncoding());
             Save(sw);
         }
 
@@ -318,7 +318,7 @@ namespace HtmlAgilityPack
         /// <param name="encoding">The character encoding to use.</param>
         public void Save(string filename, Encoding encoding)
         {
-            StreamWriter sw = new StreamWriter(filename, false, encoding);
+            StreamWriter sw = new StreamWriter(File.Open(filename, FileMode.Create, FileAccess.Write), encoding);
             Save(sw);
         }
 
