@@ -267,7 +267,7 @@ namespace HtmlAgilityPack
             }
 
             _text = reader.ReadToEnd();
-            reader.Close();
+            reader.Dispose();
             Parse();
         }
 

@@ -1236,16 +1236,16 @@ namespace HtmlAgilityPack
 			{
 				if (br != null)
 				{
-					br.Close();
+					br.Dispose();
 				}
 				if (bw != null)
 				{
 					bw.Flush();
-					bw.Close();
+					bw.Dispose();
 				}
 				if (fs != null)
 				{
-					fs.Close();
+					fs.Dispose();
 				}
 			}
 			File.SetLastWriteTime(path, touchDate);
