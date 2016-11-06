@@ -632,7 +632,7 @@ namespace HtmlAgilityPack
 												fromBase = 10;
 											}
 											int code = Convert.ToInt32(codeStr, fromBase);
- 											sb.Append(Convert.ToChar(code));
+											sb.Append(Char.ConvertFromUtf32(code));
  										}
                                         catch
                                         {
@@ -653,7 +653,7 @@ namespace HtmlAgilityPack
                                         {
                                             // we found one
                                             code = (int) o;
-                                            sb.Append(Convert.ToChar(code));
+                                            sb.Append(Char.ConvertFromUtf32(code));
                                         }
                                     }
                                     entity.Remove(0, entity.Length);
