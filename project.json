@@ -1,0 +1,30 @@
+{
+  "name": "HtmlAgilityPack",
+  "version": "1.4.9.5",
+  "buildOptions": {
+    "debugType": "portable"
+  },
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "System.Diagnostics.TraceSource": "4.0.0",
+    "System.Xml.XmlDocument": "4.0.1",
+    "System.Xml.XPath": "4.0.1",
+    "System.Xml.XPath.XmlDocument": "4.0.1"
+  },
+  "frameworks": {
+    "netstandard1.6": {
+      "buildOptions": {
+        "define": [
+          "NETCORE"
+        ]
+      }
+    },
+    "net461": {
+      "buildOptions": {
+        "define": [
+          "FX40"
+        ]
+      }
+    }
+  }
+}
