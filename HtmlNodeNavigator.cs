@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
@@ -714,14 +715,12 @@ namespace HtmlAgilityPack
         #region Internal Methods
 
         [Conditional("TRACE")]
-        internal void InternalTrace(object traceValue)
+        internal void InternalTrace(object traceValue, [CallerMemberName] string name = null)
         {
             if (!Trace)
             {
                 return;
             }
-            StackFrame sf = new StackFrame(1);
-            string name = sf.GetMethod().Name;
             string nodename = _currentnode == null ? "(null)" : _currentnode.Name;
             string nodevalue;
             if (_currentnode == null)
