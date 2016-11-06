@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+#if !NETCORE
 using System.Security;
 using System.Security.Permissions;
+#endif
 using System.Text;
 using System.Xml;
 using Microsoft.Win32;
@@ -23,6 +25,7 @@ namespace HtmlAgilityPack
 	{
 		#region Delegates
 
+#if !NETCORE
 		/// <summary>
 		/// Represents the method that will handle the PostResponse event.
 		/// </summary>
@@ -37,6 +40,7 @@ namespace HtmlAgilityPack
 		/// Represents the method that will handle the PreRequest event.
 		/// </summary>
 		public delegate bool PreRequestHandler(HttpWebRequest request);
+#endif
 
 		#endregion
 
@@ -55,6 +59,7 @@ namespace HtmlAgilityPack
 		private bool _usingCache;
 		private string _userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:x.x.x) Gecko/20041107 Firefox/x.x";
 
+#if !NETCORE
 		/// <summary>
 		/// Occurs after an HTTP request has been executed.
 		/// </summary>
@@ -69,6 +74,7 @@ namespace HtmlAgilityPack
 		/// Occurs before an HTTP request is executed.
 		/// </summary>
 		public PreRequestHandler PreRequest;
+#endif
 
 
 		#endregion
@@ -874,6 +880,17 @@ namespace HtmlAgilityPack
 		/// <returns>The path extension's MIME content type.</returns>
 		public static string GetContentTypeForExtension(string extension, string def)
 		{
+#if NETCORE
+			string contentType;
+			if (MimeTypes.TryGetValue(extension, out contentType))
+			{
+				return contentType;
+			}
+			else
+			{
+				return def;
+			}
+#else
 		    var helper = new PermissionHelper();
 			if (string.IsNullOrEmpty(extension))
 			{
@@ -903,6 +920,7 @@ namespace HtmlAgilityPack
 				}
 			}
 			return contentType;
+#endif
 		}
 
 		/// <summary>
@@ -913,6 +931,16 @@ namespace HtmlAgilityPack
 		/// <returns>The MIME content type's path extension.</returns>
 		public static string GetExtensionForContentType(string contentType, string def)
 		{
+#if NETCORE
+			foreach (KeyValuePair<string, string> pair in MimeTypes)
+			{
+				if (pair.Value == contentType)
+				{
+					return pair.Key;
+				}
+			}
+			return def;
+#else
             var helper = new PermissionHelper();
 
 			if (string.IsNullOrEmpty(contentType))
@@ -945,8 +973,10 @@ namespace HtmlAgilityPack
 				}
 			}
 			return ext;
+#endif
 		}
 
+#if !NETCORE
 		/// <summary>
 		/// Creates an instance of the given type from the specified Internet resource.
 		/// </summary>
@@ -1023,6 +1053,7 @@ namespace HtmlAgilityPack
 				throw new HtmlWebException("Unsupported uri scheme: '" + uri.Scheme + "'.");
 			}
 		}
+#endif
 
 		/// <summary>
 		/// Gets the cache file path for a specified url.
@@ -1051,6 +1082,7 @@ namespace HtmlAgilityPack
 			return cachePath;
 		}
 
+#if !NETCORE
 		/// <summary>
 		/// Gets an HTML document from an Internet resource.
 		/// </summary>
@@ -1177,6 +1209,7 @@ namespace HtmlAgilityPack
 			HtmlDocument doc = Load(htmlUrl);
 			doc.Save(writer);
 		}
+#endif
 
 
 
@@ -1252,6 +1285,7 @@ namespace HtmlAgilityPack
 			return len;
 		}
 
+#if !NETCORE
 		private HttpStatusCode Get(Uri uri, string method, string path, HtmlDocument doc, IWebProxy proxy,
 								   ICredentials creds)
 		{
@@ -1431,6 +1465,7 @@ namespace HtmlAgilityPack
 			}
 			return resp.StatusCode;
 		}
+#endif
 
 		private string GetCacheHeader(Uri requestUri, string name, string def)
 		{
@@ -1471,6 +1506,7 @@ namespace HtmlAgilityPack
             return contentEncoding.ToLower().StartsWith("gzip");
         }
 
+#if !NETCORE
 		private HtmlDocument LoadUrl(Uri uri, string method, WebProxy proxy, NetworkCredential creds)
 		{
 			HtmlDocument doc = new HtmlDocument();
@@ -1507,10 +1543,12 @@ namespace HtmlAgilityPack
 			}
 			doc.Save(file);
 		}
+#endif
 
 		#endregion
 
 	}
+#if !NETCORE
     /// <summary>
     /// Wraps getting AppDomain permissions
     /// </summary>
@@ -1566,4 +1604,5 @@ namespace HtmlAgilityPack
         /// <returns></returns>
         bool GetIsDnsAvailable();
     }
+#endif
 }
