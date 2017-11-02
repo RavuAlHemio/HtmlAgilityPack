@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VersionPrefix>1.4.9.5</VersionPrefix>
-    <TargetFrameworks>netstandard1.6;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard1.6</TargetFrameworks>
     <DebugType>portable</DebugType>
     <AssemblyName>HtmlAgilityPack</AssemblyName>
     <PackageId>HtmlAgilityPack</PackageId>
