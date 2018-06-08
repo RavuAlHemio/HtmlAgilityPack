@@ -2,11 +2,10 @@
 
   <PropertyGroup>
     <VersionPrefix>1.4.9.5</VersionPrefix>
-    <TargetFrameworks>netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <DebugType>portable</DebugType>
     <AssemblyName>HtmlAgilityPack</AssemblyName>
     <PackageId>HtmlAgilityPack</PackageId>
-    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
@@ -17,14 +16,14 @@
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
     <PackageReference Include="System.Xml.XmlDocument" Version="4.3.0" />
     <PackageReference Include="System.Xml.XPath" Version="4.3.0" />
     <PackageReference Include="System.Xml.XPath.XmlDocument" Version="4.3.0" />
   </ItemGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <DefineConstants>$(DefineConstants);NETCORE</DefineConstants>
   </PropertyGroup>
 
